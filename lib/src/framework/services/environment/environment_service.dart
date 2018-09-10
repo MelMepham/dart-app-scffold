@@ -15,12 +15,12 @@ import 'package:angular/core.dart';
 @Injectable()
 class EnvironmentService {
 
-  bool isRunningLocally       = false;
-  bool isRunningOnDev         = false;
-  bool isRunningOnStaging     = false;
-  bool isRunningInProduction  = true;
+  bool isRunningLocally;
+  bool isRunningOnDev;
+  bool isRunningOnStaging;
+  bool isRunningInProduction;
 
-  bool isDevMode = false;
+  bool isDevMode;
 
 
   EnvironmentService() {
@@ -30,7 +30,34 @@ class EnvironmentService {
 
   void _init() {
 
+    _setProdDefaults();
     _detectRunningLocation();
+
+    // override the settings for staging servers
+    if (isRunningOnStaging) {
+
+    }
+
+    // override the settings for dev servers
+    if (isRunningOnDev) {
+
+    }
+
+    // override the settings for local dev
+    if (isRunningLocally) {
+
+    }
+
+  }
+
+  void _setProdDefaults() {
+    isDevMode = false;
+
+    isRunningOnStaging = false;
+    isRunningLocally = false;
+    isRunningOnDev = false;
+    isRunningInProduction = true;
+
 
   }
   
